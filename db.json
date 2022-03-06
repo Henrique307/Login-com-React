@@ -1,0 +1,20 @@
+{
+  "contas": [
+    {
+      "nome": "vladmir",
+      "senha": "putao"
+    },
+    {
+      "nome": "batatafrita",
+      "senha": "senha2"
+    },
+    {
+      "nome": "batata",
+      "senha": "senha"
+    },
+    {
+      "nome": "sem graça",
+      "senha": "taok"
+    }
+  ]
+}
