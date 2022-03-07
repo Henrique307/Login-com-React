@@ -9,25 +9,27 @@ const Profile = () => {
     let { id } = useParams();
 
     const [contas,setContas] = useState([]);
-
-    let usuario = {}
-
+    
     useEffect(() => {
-        pegaDados(`/contas`, setContas)
-    },[])
+        pegaDados("/contas", setContas);
+    }, []);
+    
+    let usuario = ''
 
     for(let i=0;i<contas.length;i++){
         if(`:${contas[i].id}` === id){
             usuario = contas[i]
         }
     }
+
     
-    if(id === undefined){
-        return <div>ERRO Acesso negado</div>
-    }else{
-        <Banner/>
-        return <div>Bem Vindo {usuario.nome}</div>
-    }
+    return (
+        <div>
+            <Banner/>
+            <div>Bem Vindo {usuario.nome}</div>
+        </div>
+    )
+
 
 }
 

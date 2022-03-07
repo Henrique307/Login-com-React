@@ -5,9 +5,10 @@ import { pegaDados, envia } from "../api";
 
 const Cadastro = () => {
   const [erros, setErros] = useState({
+    usuario: { valido: true, mensagem: "" },
     senha: { valido: true, mensagem: "" },
-    usuario: { valido: true, mensagem: "" }
-  })
+    confirmaSenha: { valido: true, mensagem: "" },
+  });
 
   const [confirmaSenha, setConfirmaSenha] = useState("");
   const [usuario, setUsuario] = useState("");
@@ -18,7 +19,7 @@ const Cadastro = () => {
     constructor(usuario, senha) {
       this.nome = usuario;
       this.senha = senha;
-      this.id = '_' + Math.random().toString().substring(2,9)
+      this.id = "_" + Math.random().toString().substring(2, 9);
     }
   }
 
@@ -26,10 +27,26 @@ const Cadastro = () => {
     pegaDados("/contas", setContas);
   }, []);
 
-  const tamanhoMaximo = (event, maximo) => event.target.value.substring(0, maximo)
+  const tamanhoMaximo = (event, maximo) =>
+    event.target.value.substring(0, maximo);
 
-  const checaBanco = () => {
+  function checaUsuario() {
+
+    setErros({ ...erros, usuario: { valido: true, mensagem: "" } });
+    
+    if(usuario.length < 5){
+      setErros({
+        ...erros,
+        usuario: {
+          valido: false,
+          mensagem: "mínimo de 5 caracteres",
+        },
+      });
+      return;
+    }
+
     for (var i = 0; contas.length > i; i++) {
+      
       if (contas[i].nome === usuario) {
         setErros({
           ...erros,
@@ -40,40 +57,61 @@ const Cadastro = () => {
         });
         break;
       }
-      setErros({ ...erros, usuario: { valido: true, mensagem: "" } });
-    }
-  };
-
-  function checaSenha() {
-    if (senha !== confirmaSenha) {
-      setErros({
-        ...erros,
-        senha: { valido: false, mensagem: "As senhas não coincidem" },
-      });
-    } else {
-      setErros({
-        ...erros,
-        senha: { valido: true, mensagem: "" },
-      });
     }
   }
 
-  function tudoNormal() {
-      for(let erro in erros){
-        if(erro.valido === false){
-          return false
-        }else{
-          continue
-        }
+  function checaSenha() {
+
+    if(senha.length < 5){
+      setErros({
+        ...erros,
+        senha: {
+          valido: false,
+          mensagem: "mínimo de 5 caracteres",
+        },
+      });
+      return;
+    }
+
+    setErros({...erros, senha: { valido: true, mensagem: "" } });
+  }
+
+  function checaConfirmaSenha(){
+    if (senha !== confirmaSenha) {
+      setErros({
+        ...erros,
+        confirmaSenha: { valido: false, mensagem: "As senhas não coincidem" },
+      });
+      return;
+    }else{
+      setErros({...erros, confirmaSenha: { valido: true, mensagem: "" } });
+    }
+  }
+
+  function checaErros() {
+    /////////////////////////////////////// ATENÇÃO PRA O JEITO CERTO DE FAZER ISSO AQUI
+    for (let erro in erros) {
+      if (!erros[erro].valido) {
+        return true;
       }
-    };
+
+      if (usuario === "" || senha === "" || confirmaSenha.length !== senha.length) {
+        return true;
+      }
+    }
+    return false;
+    /////////////////////////////////////// ATENÇÃO PRA O JEITO CERTO DE FAZER ISSO AQUI
+  }
+
   return (
     <form
       className="janelinha"
       onSubmit={(event) => {
         event.preventDefault();
-        envia("/contas", new Player(usuario, senha));
-        console.log(contas);
+        if (usuario !== "" || senha !== "") {
+          envia("/contas", new Player(usuario, senha));
+          console.log(contas);
+        }
       }}
     >
       <h1>Cadastre-se!</h1>
@@ -81,7 +119,7 @@ const Cadastro = () => {
         onChange={(event) => {
           setUsuario(tamanhoMaximo(event, 25));
         }}
-        onBlur={checaBanco}
+        onBlur={checaUsuario}
         error={!erros.usuario.valido}
         helperText={erros.usuario.mensagem}
         variant="standard"
@@ -95,6 +133,9 @@ const Cadastro = () => {
         onChange={(event) => {
           setSenha(tamanhoMaximo(event, 15));
         }}
+        onBlur={checaSenha}
+        error={!erros.senha.valido}
+        helperText={erros.senha.mensagem}
         variant="standard"
         name="senha"
         value={senha}
@@ -106,9 +147,9 @@ const Cadastro = () => {
         onChange={(event) => {
           setConfirmaSenha(tamanhoMaximo(event, 15));
         }}
-        onBlur={checaSenha}
-        error={!erros.senha.valido}
-        helperText={erros.senha.mensagem}
+        onBlur={checaConfirmaSenha}
+        error={!erros.confirmaSenha.valido}
+        helperText={erros.confirmaSenha.mensagem}
         name="confirmaSenha"
         variant="standard"
         value={confirmaSenha}
@@ -116,7 +157,12 @@ const Cadastro = () => {
         margin="normal"
         type="password"
       />
-      <Button variant="outlined" className="botao" type="submit" disabled={true}>
+      <Button
+        variant="outlined"
+        className="botao"
+        type="submit"
+        disabled={checaErros()}
+      >
         Cadastrar
       </Button>
     </form>
