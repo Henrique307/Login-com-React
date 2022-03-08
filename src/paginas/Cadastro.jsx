@@ -83,9 +83,8 @@ const Cadastro = () => {
         confirmaSenha: { valido: false, mensagem: "As senhas não coincidem" },
       });
       return;
-    }else{
-      setErros({...erros, confirmaSenha: { valido: true, mensagem: "" } });
     }
+      setErros({...erros, confirmaSenha: { valido: true, mensagem: "" } });
   }
 
   function checaErros() {
@@ -146,6 +145,7 @@ const Cadastro = () => {
       <TextField
         onChange={(event) => {
           setConfirmaSenha(tamanhoMaximo(event, 15));
+          // ideia if(senha.length === confirmaSenha.length ) checaConfirmaSenha()
         }}
         onBlur={checaConfirmaSenha}
         error={!erros.confirmaSenha.valido}

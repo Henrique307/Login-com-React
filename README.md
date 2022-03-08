@@ -1,7 +1,7 @@
 # Aplicação simples de login e cadastro utilizando componentes React
 
- Usei também o axios e o json-server para uma conexão rápida com um banco de dados local
-para poder focar mais na interface e nas regras de negócio do cadastro em si,
+ Usei também o axios e o json-server para uma conexão rápida com um banco de dados 
+local para poder focar mais na interface e nas regras de negócio do cadastro em si,
 sendo elas:
 
 - O nome de usuário não pode ter mais de 25 letras
