@@ -10,6 +10,6 @@ sendo elas:
 - E seu nome de usuário não pode existir no banco de dados
 - Tanto o nome de usuário quanto a senha não podem ter menos de 5 caracteres
 
- dentro das confições acima, é possivel enviar seus dados
+ dentro das condições acima, é possivel enviar seus dados
 
  A página de usuário não mostra muito, por enquanto...
