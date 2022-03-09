@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { TextField, Button } from "@material-ui/core";
 
-import { busca, pegaDados } from "../api";
-import { Profile } from "./index.js";
+import { pegaDados } from "../api";
 
 import "../css/index.css";
 
-function Login({ estaLogado }) {
+function Login() {
 
   const [contas, setContas] = useState([]);
   const [usuario, setUsuario] = useState("");
