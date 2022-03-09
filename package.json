@@ -2,7 +2,7 @@
   "name": "login_com_react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://henrique307.github.io/Login_com_React",
+  "homepage": "https://henrique307.github.io/Login_com_React",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.16.2",
