@@ -1,15 +1,17 @@
-# Aplicação simples de login e cadastro utilizando componentes React
+<h1 style="color:#0D9CFF; background:lightblue;padding:0;" align="center"> Interface de Login com React.js </h1>
 
- Usei também o axios e o json-server para uma conexão rápida com um banco de dados 
-local para poder focar mais na interface e nas regras de negócio do cadastro em si,
-sendo elas:
+<section>
+    Usei Axios e Json-server para uma conexão rápida com um banco de dados
+    local, para poder focar mais na interface e nas regras de negócio do cadastro em si,
+    sendo elas:
+</section>
 
-- O nome de usuário não pode ter mais de 25 letras
-- A senha não pode ter mais de 15 letras
-- É preciso a confirmação da senha 
-- E seu nome de usuário não pode existir no banco de dados
-- Tanto o nome de usuário quanto a senha não podem ter menos de 5 caracteres
+<ul>
+    <li> O nome de usuário não pode ter mais de 25 letras </li>
+    <li> A senha não pode ter mais de 15 letras </li>
+    <li> É preciso a confirmação da senha </li>
+    <li> E seu nome de usuário não pode existir no banco de dados </li> 
+    <li> Tanto o nome de usuário quanto a senha não podem ter menos de 5 caracteres </li>
+</ul>
 
- dentro das condições acima, é possivel enviar seus dados
-
- A página de usuário não mostra muito, por enquanto...
+ A página de usuário ainda está em desenvolvimento...
