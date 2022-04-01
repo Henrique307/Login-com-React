@@ -1,4 +1,4 @@
-<h1 style="color:#0D9CFF; background:lightblue;padding:0;" align="center"> Interface de Login com React.js </h1>
+<h1 align="center"> Interface de Login com React.js </h1>
 
 <section>
     Usei Axios e Json-server para uma conexão rápida com um banco de dados
