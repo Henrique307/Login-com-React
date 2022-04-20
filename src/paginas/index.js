@@ -1,6 +1,6 @@
 import Cadastro from "./Cadastro";
 import Login from "./Login";
-import Profile from "./Profile"
+import PaginaUsuario from "./PaginaUsuario"
 import PaginaErro from "./PaginaErro";
 
-export {Cadastro, Login, Profile, PaginaErro}
+export {Cadastro, Login, PaginaUsuario, PaginaErro}

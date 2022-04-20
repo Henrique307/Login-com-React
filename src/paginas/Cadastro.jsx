@@ -88,6 +88,7 @@ const Cadastro = () => {
   }
 
   function checaErros() {
+
     /////////////////////////////////////// ATENÇÃO PRA O JEITO CERTO DE FAZER ISSO AQUI
     for (let erro in erros) {
       if (!erros[erro].valido) {
@@ -100,6 +101,7 @@ const Cadastro = () => {
     }
     return false;
     /////////////////////////////////////// ATENÇÃO PRA O JEITO CERTO DE FAZER ISSO AQUI
+
   }
 
   return (
@@ -161,7 +163,7 @@ const Cadastro = () => {
         variant="outlined"
         className="botao"
         type="submit"
-        disabled={checaErros()}
+        disabled={checaErros}
       >
         Cadastrar
       </Button>

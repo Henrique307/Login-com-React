@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { pegaDados } from '../api';
 import { Banner } from '../componentes';
 
-const Profile = () => {
+const PaginaUsuario = () => {
 
     let { id } = useParams();
 
@@ -33,4 +33,4 @@ const Profile = () => {
 
 }
 
-export default Profile
+export default PaginaUsuario

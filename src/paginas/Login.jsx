@@ -12,7 +12,7 @@ function Login() {
   const [contas, setContas] = useState([]);
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
-  const bemvindo = false;
+  // const bemvindo = false;
 
   const navigate = useNavigate()
 
@@ -68,10 +68,14 @@ function Login() {
         margin="normal"
         type="password"
       />
-      <Button type="submit" variant="outlined" className="botao">
+      <Button 
+      type="submit"
+      variant="outlined"
+      className="botao"
+      disabled={senha.length < 5 || usuario.length < 5 ? true : false}>
         Login
       </Button>
-      <span className={bemvindo ? "aparece" : "escondido"}>OLA CARALHO</span>
+      {/* <span className={bemvindo ? "aparece" : "escondido"}>OLA CARALHO</span> */}
     </form>
   );
 };
