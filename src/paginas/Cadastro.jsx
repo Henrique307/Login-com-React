@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
 
 import { pegaDados, envia } from "../api";
+import { tamanhoMaximo } from "../functions";
+import { useNavigate } from "react-router";
 
 const Cadastro = () => {
   const [erros, setErros] = useState({
@@ -14,21 +16,20 @@ const Cadastro = () => {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
   const [contas, setContas] = useState([]);
+  const [exito, setExito] = useState(false)
+  const navigate = useNavigate()
 
   class Player {
     constructor(usuario, senha) {
       this.nome = usuario;
       this.senha = senha;
-      this.id = "_" + Math.random().toString().substring(2, 9);
+      this.id = "#" + Math.random().toString().substring(2, 9);
     }
   }
 
-  useEffect(() => {
-    pegaDados("/contas", setContas);
+  useEffect( async () => {
+    await pegaDados("/contas", setContas);
   }, []);
-
-  const tamanhoMaximo = (event, maximo) =>
-    event.target.value.substring(0, maximo);
 
   function checaUsuario() {
 
@@ -99,6 +100,7 @@ const Cadastro = () => {
         return true;
       }
     }
+
     return false;
     /////////////////////////////////////// ATENÇÃO PRA O JEITO CERTO DE FAZER ISSO AQUI
 
@@ -107,11 +109,12 @@ const Cadastro = () => {
   return (
     <form
       className="janelinha"
-      onSubmit={(event) => {
+      onSubmit={ async (event) => {
         event.preventDefault();
         if (usuario !== "" || senha !== "") {
-          envia("/contas", new Player(usuario, senha));
-          console.log(contas);
+          await envia("/contas", new Player(usuario, senha));
+          setExito(true)
+          setTimeout(()=>{navigate('/')}, 5000)
         }
       }}
     >
@@ -163,10 +166,12 @@ const Cadastro = () => {
         variant="outlined"
         className="botao"
         type="submit"
-        disabled={checaErros}
+        disabled={checaErros()}
       >
         Cadastrar
       </Button>
+      <span className={exito ? "exito" : "escondido"}> Conta criada com sucesso!</span>
+      <span className={exito ? "exito" : "escondido"}> Redirecionando para página de login...</span>
     </form>
   );
 };

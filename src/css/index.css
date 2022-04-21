@@ -9,12 +9,11 @@ body{
 
 .janelinha{
     display: flex;
-    justify-content: center;
+    padding-top: 3.75rem;
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
     margin: 3rem auto;
-    padding: 15px;
     background-color: azure;
     width: 50%;
     min-height: 400px;
@@ -22,6 +21,20 @@ body{
 
 .escondido{
     display: none;
+}
+
+.exito{
+    color: rgba(0, 0, 0, 0.623);
+    margin-top: 10px;
+}
+
+.erro::before{
+    content:"Erro:";
+    color: red;
+}
+
+.erro{
+    margin-top:10px
 }
 
 .Banner{

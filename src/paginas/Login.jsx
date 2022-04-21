@@ -1,48 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { TextField, Button } from "@material-ui/core";
 
 import { pegaDados } from "../api";
+import { tamanhoMaximo, tamanhoMinimo } from "../functions";
 
 import "../css/index.css";
 
 function Login() {
 
+  
   const [contas, setContas] = useState([]);
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
-  // const bemvindo = false;
-
+  const [contaExistente, defineConta] = useState(false) //false
+  const [erros, setErros] = useState({
+    usuario: { valido: true, mensagem: "" },
+    senha: { valido: true, mensagem: "" }
+  });
+  
   const navigate = useNavigate()
 
   useEffect(() => {
     pegaDados("/contas", setContas);
   }, []);
-
-  const tamanhoMaximo = (event, maximo) =>
-    event.target.value.substring(0, maximo);
-
+  
   return (
     <form
       className="janelinha"
       onSubmit={(event) => {
         event.preventDefault();
 
-        // if(usuario === "" || senha === ""){
-        //   console.log('ce nao boto os negocio ali')
-        //   return
-        // }
-
         for (var i = 0; i < contas.length; i++) {
           if (contas[i].nome === usuario && contas[i].senha === senha) {
             navigate(`/profile:${contas[i].id}`)
             return
           }
+
+          // Testing Feature
           if (i === contas.length - 1) {
-            console.log(contas);
+            defineConta(true)
           }
         }
+
       }}
     >
       <h1>Faça seu login</h1>
@@ -50,6 +51,11 @@ function Login() {
         onChange={(event) => {
           setUsuario(tamanhoMaximo(event, 25));
         }}
+        onBlur={(event) => {
+          tamanhoMinimo(event, erros, setErros)
+        }}
+        error={!erros.usuario.valido}
+        helperText={erros.usuario.mensagem}
         variant="standard"
         name="usuario"
         value={usuario}
@@ -61,6 +67,11 @@ function Login() {
         onChange={(event) => {
           setSenha(tamanhoMaximo(event, 15));
         }}
+        onBlur={event => {
+          tamanhoMinimo(event, erros, setErros)
+        }}
+        error={!erros.senha.valido}
+        helperText={erros.senha.mensagem}
         variant="standard"
         name="senha"
         value={senha}
@@ -69,14 +80,18 @@ function Login() {
         type="password"
       />
       <Button 
-      type="submit"
-      variant="outlined"
-      className="botao"
-      disabled={senha.length < 5 || usuario.length < 5 ? true : false}>
+        type="submit"
+        variant="outlined"
+        className="botao"
+        disabled={senha.length < 5 || usuario.length < 5}
+      >
+        
         Login
       </Button>
-      {/* <span className={bemvindo ? "aparece" : "escondido"}>OLA CARALHO</span> */}
+      <span className={contaExistente ? "aparece erro" : "escondido"}> Conta inexistente, cadastre-se <Link to={"/cadastro"}>aqui</Link>!</span>
     </form>
   );
 };
 export default Login;
+
+
