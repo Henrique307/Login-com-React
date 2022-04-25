@@ -24,17 +24,25 @@ body{
 }
 
 .exito{
-    color: rgba(0, 0, 0, 0.623);
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.exito::before{
+    content:"Exito: ";
+    color: rgba(1, 100, 1, 0.938);
 }
 
 .erro::before{
-    content:"Erro:";
+    content:"Erro: ";
     color: red;
 }
 
 .erro{
-    margin-top:10px
+    margin-top:20px
+}
+
+.facaConta{
+    margin-top: 20px;
 }
 
 .Banner{

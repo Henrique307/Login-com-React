@@ -14,10 +14,10 @@ function Login() {
   const [contas, setContas] = useState([]);
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
-  const [contaExistente, defineConta] = useState(false) //false
   const [erros, setErros] = useState({
     usuario: { valido: true, mensagem: "" },
-    senha: { valido: true, mensagem: "" }
+    senha: { valido: true, mensagem: "" },
+    contaExistente: { valido:undefined, mensagem: "" }
   });
   
   const navigate = useNavigate()
@@ -25,24 +25,46 @@ function Login() {
   useEffect(() => {
     pegaDados("/contas", setContas);
   }, []);
-  
+
+
+  // ISSO AQUI É MUITO FEIO, ARRUMA UM JEITO MELHOR
+
+  function teste(erros) {
+    switch (erros.contaExistente.valido) {
+      case true: 
+      return "aparece exito"
+      case false: 
+      return "aparece erro"
+      case undefined:
+        return "escondido"
+      default: 
+        return 
+    }
+  }
+
+  //
+
   return (
     <form
       className="janelinha"
       onSubmit={(event) => {
         event.preventDefault();
 
-        for (var i = 0; i < contas.length; i++) {
-          if (contas[i].nome === usuario && contas[i].senha === senha) {
-            navigate(`/profile:${contas[i].id}`)
-            return
-          }
+        let conta = contas.find(conta => conta.nome === usuario && conta.senha === senha)
 
-          // Testing Feature
-          if (i === contas.length - 1) {
-            defineConta(true)
-          }
+        if(conta){
+          setErros({...erros, contaExistente: { valido:true, mensagem: "Redirecinando para sua página..."}})
+          setTimeout(()=>{navigate(`/profile:${conta.id}`)}, 5000)
+        } else {
+          setErros({...erros, contaExistente: { valido:false, mensagem: `Conta não encontrada =/` }})
         }
+        // solução antiga
+        // for (var i = 0; i < contas.length; i++) {
+        //   if (contas[i].nome === usuario && contas[i].senha === senha) {
+        //     navigate(`/profile:${contas[i].id}`)
+        //     return
+        //   }
+        // }
 
       }}
     >
@@ -61,7 +83,6 @@ function Login() {
         value={usuario}
         placeholder="usuario"
         margin="normal"
-        autoFocus
       />
       <TextField
         onChange={(event) => {
@@ -88,7 +109,8 @@ function Login() {
         
         Login
       </Button>
-      <span className={contaExistente ? "aparece erro" : "escondido"}> Conta inexistente, cadastre-se <Link to={"/cadastro"}>aqui</Link>!</span>
+      <span className="facaConta"> Não possui uma conta? <Link to={'/cadastro'}> Cadastre-se! </Link></span>
+      <span className={teste(erros)}> {erros.contaExistente.mensagem} </span>
     </form>
   );
 };

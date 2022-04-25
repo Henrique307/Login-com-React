@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Link } from "@material-ui/core";
 
 import { pegaDados, envia } from "../api";
 import { tamanhoMaximo } from "../functions";
@@ -131,7 +131,6 @@ const Cadastro = () => {
         value={usuario}
         placeholder="usuario"
         margin="normal"
-        autoFocus
       />
       <TextField
         onChange={(event) => {
@@ -170,6 +169,7 @@ const Cadastro = () => {
       >
         Cadastrar
       </Button>
+      <span className="facaConta"> Ja possui uma conta? <Link to={'/'}> Faça login!</Link></span>
       <span className={exito ? "exito" : "escondido"}> Conta criada com sucesso!</span>
       <span className={exito ? "exito" : "escondido"}> Redirecionando para página de login...</span>
     </form>
