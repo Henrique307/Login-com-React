@@ -27,7 +27,7 @@ const Cadastro = () => {
     }
   }
 
-  useEffect( async () => {
+  useEffect(async () => {
     await pegaDados("/contas", setContas);
   }, []);
 

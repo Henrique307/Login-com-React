@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { Cadastro, Login, PaginaUsuario, PaginaErro } from "./paginas";
 
@@ -8,14 +8,14 @@ import "./css/index.css"
 function App() {
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/profile:id" element={<PaginaUsuario />} />
-        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/cadastro" element={<Cadastro />} /> 
         <Route path="*" element={<PaginaErro/>} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
