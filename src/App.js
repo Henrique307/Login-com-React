@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 import { Cadastro, Login, PaginaUsuario, PaginaErro } from "./paginas";
 
@@ -10,9 +10,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/profile:id" element={<PaginaUsuario />} />
-        <Route path="/cadastro" element={<Cadastro />} /> 
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/profile:id" element={<PaginaUsuario />} />
+        <Route exact path="/cadastro" element={<Cadastro />} />
         <Route path="*" element={<PaginaErro/>} />
       </Routes>
     </Router>
