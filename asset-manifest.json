@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/loginComReact/static/css/main.31b43d3d.css",
-    "main.js": "/loginComReact/static/js/main.76f5a730.js",
-    "index.html": "/loginComReact/index.html",
-    "main.31b43d3d.css.map": "/loginComReact/static/css/main.31b43d3d.css.map",
-    "main.76f5a730.js.map": "/loginComReact/static/js/main.76f5a730.js.map"
+    "main.css": "/loginreact/static/css/main.31b43d3d.css",
+    "main.js": "/loginreact/static/js/main.76f5a730.js",
+    "index.html": "/loginreact/index.html",
+    "main.31b43d3d.css.map": "/loginreact/static/css/main.31b43d3d.css.map",
+    "main.76f5a730.js.map": "/loginreact/static/js/main.76f5a730.js.map"
   },
   "entrypoints": [
     "static/css/main.31b43d3d.css",
