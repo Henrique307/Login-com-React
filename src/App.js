@@ -1,22 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Cadastro, Login, PaginaUsuario, PaginaErro } from "./paginas";
+import { Cadastro, Login, PaginaUsuario, PaginaErro } from "./view/paginas";
 
-import "./css/index.css"
+import "./css/index.css";
 
 function App() {
-
-  return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="/profile:id" element={<PaginaUsuario />} />
-        <Route exact path="/cadastro" element={<Cadastro />} />
-        <Route path="*" element={<PaginaErro/>} />
-      </Routes>
-    </Router>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route exact path="/login" element={<Login />} />
+				<Route exact path="/" element={<PaginaUsuario />} />
+				<Route exact path="/cadastro" element={<Cadastro />} />
+				<Route path="*" element={<PaginaErro />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
